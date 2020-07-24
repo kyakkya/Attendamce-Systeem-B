@@ -11,6 +11,20 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header clas ="navbar navbar-fixed-top navbar-inverse" >  <!--ヘッダータグはページ上部にある帯を表している。-->
+      <div class="container">
+        <%= link_to "勤怠システム", '#', id="logo" %>
+        <nav>
+          <ul class="nav navbar-nav navbar-right">  <!--右側を設定している。--> 
+          <li><%= link_to "Top", '#' %></li>
+            <li><%= link_to "Log in", '#'  %></li> 
+          </ul>
+        </nav>
+      </div>
+    </header>
+    
+    <div class="container">
+      <%= yield %>
+    </div>
   </body>
 </html>
