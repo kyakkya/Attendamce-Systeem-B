@@ -1,30 +1,24 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= full_title(yield(:title)) %> | AttendanceApp</title>
+    <title><%= full_title(yield(:title)) %></title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 
                                'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application',
                                'data-turbolinks-track': 'reload' %>
+    <!--[if lt IE 9]>
+     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js">
+     </script>
+    <![endif]-->    
+    <%= render 'layouts/shim' %>
   </head>
 
   <body>
-    <header clas ="navbar navbar-fixed-top navbar-inverse" >  <!--ヘッダータグはページ上部にある帯を表している。-->
-      <div class="container">
-        <%= link_to "勤怠システム", '#', id="logo" %>
-        <nav>
-          <ul class="nav navbar-nav navbar-right">  <!--右側を設定している。--> 
-          <li><%= link_to "Top", '#' %></li>
-            <li><%= link_to "Log in", '#'  %></li> 
-          </ul>
-        </nav>
-      </div>
-    </header>
-    
+   <%= render 'layouts/header' %>
     <div class="container">
-      <%= yield %>
+    <%= yield %>
     </div>
   </body>
 </html>
