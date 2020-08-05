@@ -1,10 +1,14 @@
 class UsersController < ApplicationController
  before_action :set_user, only: [:show, :edit, :update]
- before_action :logged_in_user, only: [:show, :edit, :update]
+ before_action :logged_in_user, only: [:index, :show, :edit, :update]
  before_action :correct_user, only: [:edit, :update]
  
+ def index
+   @users = User.all
+ end   
+ 
+ 
  def show
-   @user = User.find(params[:id]) #VUsersコントローラにリクエストが送信されると、上記のparams[:id]は/users/1の1に置き換わります。
  end   
     
  
@@ -53,8 +57,9 @@ class UsersController < ApplicationController
    
    def logged_in_user   #unlessは条件式がfalseの場合のみ記述した処理が実行される構文です
      unless logged_in? #ヘルパーメソッドがここでも役に立ちます
-      flash[:danger] = "ログインして下さい。"
-      redirect_to login_url #ログインしていないユーザーだった場合リダイレクト
+       store_location
+       flash[:danger] = "ログインして下さい。"
+       redirect_to login_url #ログインしていないユーザーだった場合リダイレクト
      end  
    end    
 
@@ -62,7 +67,6 @@ class UsersController < ApplicationController
    
     # アクセスしたユーザーが現在ログインしているユーザーか確認します。
   def correct_user
-    @user = User.find(params[:id])
-    redirect_to(root_url) unless current_user?(@user)
+     redirect_to(root_url) unless current_user?(@user)
   end
 end
