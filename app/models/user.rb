@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_many :attendances, dependent: :destroy
   attr_accessor :remember_token
   before_save { self.email = email.downcase }
  
@@ -8,7 +9,7 @@ class User < ApplicationRecord
   validates :email, presence: true, length: { maximum: 100},
              format: { with: VALID_EMAIL_REGEX },
              uniqueness: true 
-  validates :department, length: { in: 2..30 }, allow_blank: true
+  validates :department, length: { in: 2..50 }, allow_blank: true
   validates :basic_time, presence: true
   validates :work_time, presence: true
   has_secure_password  
@@ -19,7 +20,7 @@ class User < ApplicationRecord
  def User.digest(string)
    cost =
      if ActiveModel::SecurePassword.min_cost
-       BCrypt::Engine:MIN_COST
+       BCrypt::Engine::MIN_COST
      else
        BCrypt::Engine.cost
      end 
