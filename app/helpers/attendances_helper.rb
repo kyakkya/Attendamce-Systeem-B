@@ -1,4 +1,5 @@
 module AttendancesHelper
+ 
  def attendance_state(attendance)
     # 受け取ったAttendanceオブジェクトが当日と一致するか評価します。
     if Date.current == attendance.worked_on
