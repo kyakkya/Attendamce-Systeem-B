@@ -4,9 +4,16 @@ class UsersController < ApplicationController
   before_action :correct_user, only: [:edit, :update]
   before_action :admin_user, only: [:destroy, :edit_basic_info, :update_basic_info]
   before_action :set_one_month, only: :show
+   
+ 
   def index
     @users = User.paginate(page: params[:page])
+    if params[:search].present? 
+      @users = @users.search(params[:search])
+    end   
   end
+  
+ 
 
   def show
      @worked_sum = @attendances.where.not(started_at: nil).count

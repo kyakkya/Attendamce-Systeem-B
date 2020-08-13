@@ -1,5 +1,13 @@
 <% provide(:title, 'All Users') %>
 <h1>ユーザ一覧</h1>
+ 
+<p class="col-md-offset-8"> ユーザー名検索</p>
+<form class="col-md-offset-8"> 
+  <%= form_tag(users_path,:method => 'get') do %>
+    <%= text_field_tag :search %>
+    <%= submit_tag  "索検", :name => nil %>
+  <% end %>
+</form>  
 
 <div class="col-md-10 col-md-offset-1">
   <%= will_paginate %>
